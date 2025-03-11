@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #3ED9EA;
+    font-weight: 600;
+}
+
+#projects {
+    position: relative;
+    padding: 100px 20px;
+    color: white;
+    overflow: hidden;
+}
+
+
+#projects-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures particles are behind everything */
+    pointer-events: none;
+}
+
+.projects-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.projects-text {
+    flex: 1;
+    max-width: 400px;
+    filter: blur(10px); /* Start with a blur */
+    opacity: 0; /* Invisible at start */
+    transform: translateX(-50px); /* Move slightly left */
+    transition: opacity 1s ease-out, filter 1s ease-out, transform 1s ease-out;
+    z-index: 1; /* Ensures it stays above the particles */
+}
+
+.projects-text.aos-animate {
+    filter: blur(0px); /* Remove blur when in view */
+    opacity: 1;
+    transform: translateX(0); /* Move to normal position */
+}
+
+.projects-text h2 {
+    font-size: 2.5rem;
+    color: #3ED9EA;
+    text-shadow: 0px 0px 10px rgba(62, 217, 234, 0.8),
+                 0px 0px 20px rgba(62, 217, 234, 0.6);
+}
+
+.projects-text p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.projects-list {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center; /* Centers everything horizontally */
+    gap: 30px;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 20px rgba(62, 217, 234, 0.5);
+}
+
+.project-card h3 {
+    color: #3ED9EA;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.project-card a {
+    text-decoration: none;
+    color: #3ED9EA;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.project-card a:hover {
+    color: #ffffff;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, textarea {
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background: #3ED9EA;
+    border: none;
+    padding: 10px 20px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #2DB2C5;
+}
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.project-card {
+    background: rgba(34, 34, 34, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(62, 217, 234, 0.7);
+}
+
+#hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px rgba(62, 217, 234, 0.7);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.profile-container:hover {
+    box-shadow: 0px 0px 35px rgba(62, 217, 234, 1);
+}
+
+#profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+#tsparticles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Contact Section */
+/* Contact Section */
+#contact {
+    position: relative;
+    padding: 100px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-height: 500px;
+
+}
+
+/* Left and Right Overlays */
+#contact-overlay-left,
+#contact-overlay-right {
+    position: absolute;
+    top: 0;
+    width: 25%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* Dark overlay */
+    z-index: 2;
+    overflow: hidden;
+}
+
+#contact-overlay-left {
+    left: 0;
+}
+
+#contact-overlay-right {
+    right: 0;
+}
+
+#contact-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures particles are behind everything */
+    pointer-events: none;
+}
+
+#contact-particles1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures particles are behind everything */
+    pointer-events: none;
+}
+
+.contact-text {
+    flex: 1;
+    max-width: 400px;
+    filter: blur(10px); /* Start with a blur */
+    opacity: 0; /* Invisible at start */
+    transform: translateY(-50px); /* Move slightly left */
+    transition: opacity 1s ease-out, filter 1s ease-out, transform 1s ease-out;
+    z-index: 1; /* Ensures it stays above the particles */
+}
+
+.contact-text.aos-animate {
+    filter: blur(0px); /* Remove blur when in view */
+    opacity: 1;
+    transform: translateX(0); /* Move to normal position */
+}
+
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.flash-message {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.flash-message.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.flash-message.danger {
+    background-color: #FF5733;
+    color: white;
+}
+
+
+
+
+
+
