@@ -3,6 +3,7 @@ from flask_mail import Mail, Message
 import os
 import logging
 import traceback  # Allows us to capture full error details
+import re # Regex for email validation
 
 app = Flask(__name__)
 
@@ -70,22 +71,26 @@ def contact():
     return redirect(url_for('home'))
 
 
-
-
-
 @app.route('/test-email')
 def test_email():
     try:
-        sender_email = app.config['MAIL_DEFAULT_SENDER']
+        sender_email = app.config.get("MAIL_DEFAULT_SENDER", "joshuafields.dev@gmail.com").strip()
 
-        # Force sender email to be a valid Gmail address
-        if not sender_email or "@" not in sender_email:
-            sender_email = "joshuafields.dev@gmail.com"
+        # Validate and sanitize email fields
+        def clean_email(email):
+            return re.sub(r"\s", "", email)  # Remove all spaces
+
+        recipient_email = "JoshuaFields.dev@gmail.com"
+        subject = "Test Email from Railway"
+
+        # Ensure no invalid characters in subject
+        if "\n" in subject or "\r" in subject:
+            raise ValueError("Invalid subject header")
 
         msg = Message(
-            subject="Test Email from Railway",
-            sender=sender_email,  # Ensure sender is valid
-            recipients=["JoshuaFields.dev@gmail.com"]
+            subject=subject,
+            sender=clean_email(sender_email),  # Ensure sender is properly formatted
+            recipients=[clean_email(recipient_email)]
         )
         msg.body = "This is a test email from Railway."
 
@@ -97,6 +102,7 @@ def test_email():
         print(f"❌ Email sending error: {error_details}")
         logging.error(f"❌ Email sending error: {error_details}")
         return f"❌ Email error:\n{error_details}", 500
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
