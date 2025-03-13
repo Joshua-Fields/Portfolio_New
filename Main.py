@@ -3,24 +3,35 @@ from flask_mail import Mail, Message
 import os
 
 app = Flask(__name__)
-#2J64EYC8LH5HN5CE3PB6V9NA recovery code
+
 # Configure Flask-Mail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587  # Use TLS instead of SSL
 app.config['MAIL_USE_TLS'] = True  # Enable TLS
 app.config['MAIL_USE_SSL'] = False  # Disable SSL
 app.config['MAIL_USERNAME'] = 'joshuafields.dev@gmail.com'
-app.config['MAIL_PASSWORD'] = 'fill in your gmail app password'  # Your Gmail App Password
-app.config['MAIL_DEFAULT_SENDER'] = 'joshuafields.dev@gmail.com'
+app.config['MAIL_PASSWORD'] = 'ozau zvjd tgmt gxnc'  # Your Gmail App Password
 app.config['MAIL_DEFAULT_SENDER'] = 'joshuafields.dev@gmail.com'  # Must match MAIL_USERNAME
 
 mail = Mail(app)
 
-# Sample data
+# Sample project data
 projects = [
-    {"name": "Cloud-Native E-commerce Platform", "This project is a cloud-native e-commerce platform built using Flask, Docker, and Google Kubernetes Engine (GKE).": "Cloud-Native E-commerce Platform", "github": "https://github.com/Joshua-Fields/cloud-native-ecommerce"},
-    {"name": "RFIQD Flattening & Mock-File Reducer", "This repository provides tools to reduce the size of .rfiqd files by creating “mock” copies with limited data.": "RFIQD Flattening & Mock-File Reducer", "github": "https://github.com/Joshua-Fields/RFIQD-Compression"},
-    {"name": "Distributed Mandelbrot Fractal Renderer", "Demonstrates distributed processing by rendering the Mandelbrot fractal across multiple Dask workers.": "Distributed Mandelbrot Fractal Renderer", "github": "https://github.com/Joshua-Fields/Monte-Carlo/tree/main"}
+    {
+        "name": "Cloud-Native E-commerce Platform",
+        "description": "This project is a cloud-native e-commerce platform built using Flask, Docker, and Google Kubernetes Engine (GKE).",
+        "github": "https://github.com/Joshua-Fields/cloud-native-ecommerce"
+    },
+    {
+        "name": "RFIQD Flattening & Mock-File Reducer",
+        "description": "This repository provides tools to reduce the size of .rfiqd files by creating 'mock' copies with limited data.",
+        "github": "https://github.com/Joshua-Fields/RFIQD-Compression"
+    },
+    {
+        "name": "Distributed Mandelbrot Fractal Renderer",
+        "description": "Demonstrates distributed processing by rendering the Mandelbrot fractal across multiple Dask workers.",
+        "github": "https://github.com/Joshua-Fields/Monte-Carlo/tree/main"
+    }
 ]
 
 @app.route('/')
@@ -34,9 +45,11 @@ def contact():
     message_body = request.form.get('message')
 
     # Compose email
-    msg = Message(f"New Contact Request from {name}",
-                  sender=email,
-                  recipients=["JoshuaFields.dev@gmail.com"])  # Your work email
+    msg = Message(
+        subject=f"New Contact Request from {name}",
+        sender=app.config['MAIL_DEFAULT_SENDER'],  # Always send from the configured email
+        recipients=["JoshuaFields.dev@gmail.com"]
+    )
     msg.body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
 
     try:
@@ -48,5 +61,6 @@ def contact():
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8000))  # Railway assigns dynamic port
     app.secret_key = os.urandom(24)  # Enables flash messages
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=port, debug=True)  # Binds to Railway's port
