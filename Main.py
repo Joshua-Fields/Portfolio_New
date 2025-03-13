@@ -44,10 +44,9 @@ def contact():
     email = request.form.get('email')
     message_body = request.form.get('message')
 
-    # Compose email
     msg = Message(
         subject=f"New Contact Request from {name}",
-        sender=app.config['MAIL_DEFAULT_SENDER'],  # Always send from the configured email
+        sender=app.config['MAIL_DEFAULT_SENDER'],  # Always send from your Gmail
         recipients=["JoshuaFields.dev@gmail.com"]
     )
     msg.body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
@@ -56,9 +55,12 @@ def contact():
         mail.send(msg)
         flash("Message sent successfully!", "success")
     except Exception as e:
+        print(f"Error sending email: {e}")  # Print full error message to logs
         flash(f"Failed to send message: {str(e)}", "danger")
 
     return redirect(url_for('home'))
+
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))  # Railway assigns dynamic port
