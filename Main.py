@@ -76,9 +76,15 @@ def contact():
 @app.route('/test-email')
 def test_email():
     try:
+        sender_email = app.config['MAIL_DEFAULT_SENDER']
+
+        # Force sender email to be a valid Gmail address
+        if not sender_email or "@" not in sender_email:
+            sender_email = "joshuafields.dev@gmail.com"
+
         msg = Message(
-            "Test Email from Railway",
-            sender=app.config['MAIL_DEFAULT_SENDER'],
+            subject="Test Email from Railway",
+            sender=sender_email,  # Ensure sender is valid
             recipients=["JoshuaFields.dev@gmail.com"]
         )
         msg.body = "This is a test email from Railway."
@@ -87,11 +93,10 @@ def test_email():
         return "✅ Test email sent successfully!", 200
 
     except Exception as e:
-        error_details = traceback.format_exc()  # Get full error traceback
-        print(f"❌ Failed to send test email: {error_details}")  # Print to Railway logs
-        logging.error(f"❌ Email sending error: {error_details}")  # Log error
-        return f"❌ Email error:\n{error_details}", 500  # Show full error
-
+        error_details = traceback.format_exc()
+        print(f"❌ Email sending error: {error_details}")
+        logging.error(f"❌ Email sending error: {error_details}")
+        return f"❌ Email error:\n{error_details}", 500
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
