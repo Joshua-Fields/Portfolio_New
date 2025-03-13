@@ -58,34 +58,31 @@ def contact():
             return re.sub(r"\s", "", email)  # Remove spaces and newlines
 
         if not name or not email or not message_body:
-            flash("❌ All fields are required.", "danger")
-            return redirect(url_for('home'))
+            return "❌ All fields are required.", 400
 
         # Prevent header injection attacks
         if "\n" in name or "\r" in name or "\n" in email or "\r" in email:
-            flash("❌ Invalid characters in input.", "danger")
-            return redirect(url_for('home'))
+            return "❌ Invalid characters in input.", 400
 
-        # Use a fixed sender (Gmail requires the sender to be a registered address)
         sender_email = app.config.get("MAIL_DEFAULT_SENDER", "joshuafields.dev@gmail.com")
 
         msg = Message(
             subject=f"New Contact Request from {name}",
-            sender=clean_email(sender_email),  # Ensure a valid sender
+            sender=clean_email(sender_email),
             recipients=["JoshuaFields.dev@gmail.com"]
         )
         msg.body = f"Name: {name}\nEmail: {clean_email(email)}\n\nMessage:\n{message_body}"
 
         mail.send(msg)
-        flash("✅ Message sent successfully!", "success")
-        return redirect(url_for('home'))
+        print("✅ Email sent successfully!")  # Debugging log
+        return "✅ Message sent successfully!", 200  # Return a 200 OK status
 
     except Exception as e:
         error_details = traceback.format_exc()
         print(f"❌ Email sending error: {error_details}")
         logging.error(f"❌ Email sending error: {error_details}")
-        flash(f"❌ Failed to send message: {str(e)}", "danger")
-        return redirect(url_for('home'))
+        return f"❌ Internal Server Error: {error_details}", 500  # Return error response
+
 
 
 
