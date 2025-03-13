@@ -1,17 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
 import os
+import logging
 
 app = Flask(__name__)
 
-# Configure Flask-Mail
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587  # Use TLS instead of SSL
-app.config['MAIL_USE_TLS'] = True  # Enable TLS
-app.config['MAIL_USE_SSL'] = False  # Disable SSL
-app.config['MAIL_USERNAME'] = 'joshuafields.dev@gmail.com'
-app.config['MAIL_PASSWORD'] = 'ozau zvjd tgmt gxnc'  # Your Gmail App Password
-app.config['MAIL_DEFAULT_SENDER'] = 'joshuafields.dev@gmail.com'  # Must match MAIL_USERNAME
+# Setup logging to write errors to a file (for Railway logs)
+logging.basicConfig(filename="error.log", level=logging.DEBUG,
+                    format="%(asctime)s %(levelname)s: %(message)s")
+
+# Configure Flask-Mail with environment variables for security
+app.config['MAIL_SERVER'] = os.getenv("MAIL_SERVER", "smtp.gmail.com")
+app.config['MAIL_PORT'] = int(os.getenv("MAIL_PORT", 587))
+app.config['MAIL_USE_TLS'] = os.getenv("MAIL_USE_TLS", "True") == "True"
+app.config['MAIL_USE_SSL'] = os.getenv("MAIL_USE_SSL", "False") == "True"
+app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME", "joshuafields.dev@gmail.com")
+app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD", "")
+app.config['MAIL_DEFAULT_SENDER'] = app.config['MAIL_USERNAME']
 
 mail = Mail(app)
 
@@ -46,23 +51,24 @@ def contact():
 
     msg = Message(
         subject=f"New Contact Request from {name}",
-        sender=app.config['MAIL_DEFAULT_SENDER'],  # Always send from your Gmail
+        sender=app.config['MAIL_DEFAULT_SENDER'],
         recipients=["JoshuaFields.dev@gmail.com"]
     )
     msg.body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
 
     try:
+        logging.info(f"Attempting to send email from {email} to {app.config['MAIL_DEFAULT_SENDER']}")
         mail.send(msg)
         flash("Message sent successfully!", "success")
+        logging.info("Email sent successfully!")
     except Exception as e:
-        print(f"Error sending email: {e}")  # Print full error message to logs
-        flash(f"Failed to send message: {str(e)}", "danger")
+        error_message = f"Failed to send message: {str(e)}"
+        logging.error(error_message)
+        flash(error_message, "danger")
 
     return redirect(url_for('home'))
 
-
-
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8000))  # Railway assigns dynamic port
-    app.secret_key = os.urandom(24)  # Enables flash messages
-    app.run(host="0.0.0.0", port=port, debug=True)  # Binds to Railway's port
+    port = int(os.environ.get("PORT", 8000))
+    app.secret_key = os.urandom(24)
+    app.run(host="0.0.0.0", port=port, debug=True)
