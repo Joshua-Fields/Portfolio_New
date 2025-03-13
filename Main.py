@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
 import os
 import logging
+import traceback  # Allows us to capture full error details
 
 app = Flask(__name__)
 
@@ -69,6 +70,9 @@ def contact():
     return redirect(url_for('home'))
 
 
+
+
+
 @app.route('/test-email')
 def test_email():
     try:
@@ -83,9 +87,10 @@ def test_email():
         return "✅ Test email sent successfully!", 200
 
     except Exception as e:
-        error_message = f"❌ Failed to send test email: {str(e)}"
-        print(error_message)  # Log to Railway's console
-        return error_message, 500  # Display the actual error
+        error_details = traceback.format_exc()  # Get full error traceback
+        print(f"❌ Failed to send test email: {error_details}")  # Print to Railway logs
+        logging.error(f"❌ Email sending error: {error_details}")  # Log error
+        return f"❌ Email error:\n{error_details}", 500  # Show full error
 
 
 if __name__ == '__main__':
