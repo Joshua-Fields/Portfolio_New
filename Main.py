@@ -68,6 +68,19 @@ def contact():
 
     return redirect(url_for('home'))
 
+@app.route('/test-email')
+def test_email():
+    try:
+        msg = Message("Test Email from Railway",
+                      sender=app.config['MAIL_DEFAULT_SENDER'],
+                      recipients=["JoshuaFields.dev@gmail.com"])
+        msg.body = "This is a test email from Railway."
+        mail.send(msg)
+        return "✅ Test email sent successfully!", 200
+    except Exception as e:
+        return f"❌ Failed to send test email: {str(e)}", 500
+
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.secret_key = os.urandom(24)
