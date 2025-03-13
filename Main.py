@@ -68,17 +68,24 @@ def contact():
 
     return redirect(url_for('home'))
 
+
 @app.route('/test-email')
 def test_email():
     try:
-        msg = Message("Test Email from Railway",
-                      sender=app.config['MAIL_DEFAULT_SENDER'],
-                      recipients=["JoshuaFields.dev@gmail.com"])
+        msg = Message(
+            "Test Email from Railway",
+            sender=app.config['MAIL_DEFAULT_SENDER'],
+            recipients=["JoshuaFields.dev@gmail.com"]
+        )
         msg.body = "This is a test email from Railway."
+
         mail.send(msg)
         return "✅ Test email sent successfully!", 200
+
     except Exception as e:
-        return f"❌ Failed to send test email: {str(e)}", 500
+        error_message = f"❌ Failed to send test email: {str(e)}"
+        print(error_message)  # Log to Railway's console
+        return error_message, 500  # Display the actual error
 
 
 if __name__ == '__main__':
