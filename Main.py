@@ -45,30 +45,48 @@ projects = [
 def home():
     return render_template('index.html', projects=projects, github="https://github.com/Joshua-Fields", linkedin="https://www.linkedin.com/in/joshua-fields-/")
 
+
 @app.route('/contact', methods=['POST'])
 def contact():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    message_body = request.form.get('message')
-
-    msg = Message(
-        subject=f"New Contact Request from {name}",
-        sender=app.config['MAIL_DEFAULT_SENDER'],
-        recipients=["JoshuaFields.dev@gmail.com"]
-    )
-    msg.body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
-
     try:
-        logging.info(f"Attempting to send email from {email} to {app.config['MAIL_DEFAULT_SENDER']}")
-        mail.send(msg)
-        flash("Message sent successfully!", "success")
-        logging.info("Email sent successfully!")
-    except Exception as e:
-        error_message = f"Failed to send message: {str(e)}"
-        logging.error(error_message)
-        flash(error_message, "danger")
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        message_body = request.form.get('message', '').strip()
 
-    return redirect(url_for('home'))
+        # Validate and sanitize user email
+        def clean_email(email):
+            return re.sub(r"\s", "", email)  # Remove spaces and newlines
+
+        if not name or not email or not message_body:
+            flash("❌ All fields are required.", "danger")
+            return redirect(url_for('home'))
+
+        # Prevent header injection attacks
+        if "\n" in name or "\r" in name or "\n" in email or "\r" in email:
+            flash("❌ Invalid characters in input.", "danger")
+            return redirect(url_for('home'))
+
+        # Use a fixed sender (Gmail requires the sender to be a registered address)
+        sender_email = app.config.get("MAIL_DEFAULT_SENDER", "joshuafields.dev@gmail.com")
+
+        msg = Message(
+            subject=f"New Contact Request from {name}",
+            sender=clean_email(sender_email),  # Ensure a valid sender
+            recipients=["JoshuaFields.dev@gmail.com"]
+        )
+        msg.body = f"Name: {name}\nEmail: {clean_email(email)}\n\nMessage:\n{message_body}"
+
+        mail.send(msg)
+        flash("✅ Message sent successfully!", "success")
+        return redirect(url_for('home'))
+
+    except Exception as e:
+        error_details = traceback.format_exc()
+        print(f"❌ Email sending error: {error_details}")
+        logging.error(f"❌ Email sending error: {error_details}")
+        flash(f"❌ Failed to send message: {str(e)}", "danger")
+        return redirect(url_for('home'))
+
 
 
 @app.route('/test-email')
