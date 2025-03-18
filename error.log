@@ -514,3 +514,44 @@
 2025-03-18 12:59:44,238 INFO: 127.0.0.1 - - [18/Mar/2025 12:59:44] "[36mGET /static/img/unclesams.png HTTP/1.1[0m" 304 -
 2025-03-18 12:59:44,239 INFO: 127.0.0.1 - - [18/Mar/2025 12:59:44] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
 2025-03-18 13:08:49,998 INFO: 127.0.0.1 - - [18/Mar/2025 13:08:49] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-18 19:24:50,762 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.67.126.127:8000
+2025-03-18 19:24:50,763 INFO: [33mPress CTRL+C to quit[0m
+2025-03-18 19:24:50,764 INFO:  * Restarting with stat
+2025-03-18 19:24:50,911 WARNING:  * Debugger is active!
+2025-03-18 19:24:50,940 INFO:  * Debugger PIN: 762-450-629
+2025-03-18 19:30:58,252 INFO: 127.0.0.1 - - [18/Mar/2025 19:30:58] "GET / HTTP/1.1" 200 -
+2025-03-18 19:30:58,314 INFO: 127.0.0.1 - - [18/Mar/2025 19:30:58] "GET /static/style.css HTTP/1.1" 200 -
+2025-03-18 19:30:58,317 INFO: 127.0.0.1 - - [18/Mar/2025 19:30:58] "GET /static/script.js HTTP/1.1" 200 -
+2025-03-18 19:30:58,318 INFO: 127.0.0.1 - - [18/Mar/2025 19:30:58] "GET /static/profile.jpg HTTP/1.1" 200 -
+2025-03-18 19:31:00,538 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:00] "GET /static/img/Graphic.jpg HTTP/1.1" 200 -
+2025-03-18 19:31:00,966 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-18 19:31:09,237 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /about HTTP/1.1" 200 -
+2025-03-18 19:31:09,276 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "[33mGET /static/css/base.css HTTP/1.1[0m" 404 -
+2025-03-18 19:31:09,281 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /static/img/BRUNEL.png HTTP/1.1" 200 -
+2025-03-18 19:31:09,283 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /static/img/vita-Nova-logo.png HTTP/1.1" 200 -
+2025-03-18 19:31:09,285 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /static/css/demo2.css HTTP/1.1" 200 -
+2025-03-18 19:31:09,296 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /static/img/unclesams.png HTTP/1.1" 200 -
+2025-03-18 19:31:09,302 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /static/js/noise.min.js HTTP/1.1" 200 -
+2025-03-18 19:31:09,305 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-03-18 19:31:09,312 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /static/js/util.js HTTP/1.1" 200 -
+2025-03-18 19:31:09,322 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "GET /static/js/swirl.js HTTP/1.1" 200 -
+2025-03-18 19:31:09,329 INFO: 127.0.0.1 - - [18/Mar/2025 19:31:09] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,696 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "GET /about HTTP/1.1" 200 -
+2025-03-18 19:32:21,720 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[33mGET /static/css/base.css HTTP/1.1[0m" 404 -
+2025-03-18 19:32:21,732 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/css/demo2.css HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,735 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,736 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/img/BRUNEL.png HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,737 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/img/vita-Nova-logo.png HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,746 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/img/unclesams.png HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,747 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/js/noise.min.js HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,757 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/js/util.js HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,759 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/js/swirl.js HTTP/1.1[0m" 304 -
+2025-03-18 19:32:21,764 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:21] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2025-03-18 19:32:45,430 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:45] "GET / HTTP/1.1" 200 -
+2025-03-18 19:32:45,455 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:45] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2025-03-18 19:32:45,458 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:45] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2025-03-18 19:32:45,459 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:45] "[36mGET /static/profile.jpg HTTP/1.1[0m" 304 -
+2025-03-18 19:32:45,589 INFO: 127.0.0.1 - - [18/Mar/2025 19:32:45] "[36mGET /static/img/Graphic.jpg HTTP/1.1[0m" 304 -
