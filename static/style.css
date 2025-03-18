@@ -306,6 +306,45 @@ button:hover {
     color: white;
 }
 
+.projects-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap; /* Helps wrapping */
+}
+
+@media (max-width: 768px) {
+    .projects-container {
+        flex-direction: column; /* Stack text and cards vertically */
+        gap: 30px;
+        align-items: center; /* Center on mobile */
+        text-align: center;
+    }
+
+    .projects-text {
+        max-width: 90%; /* Give more breathing room on mobile */
+        text-align: center;
+    }
+
+    .projects-list {
+        justify-content: center;
+    }
+
+    .project-card {
+    width: 300px;
+    max-width: 90vw; /* Prevent overflow on small screens */
+}
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+
 
 
 
