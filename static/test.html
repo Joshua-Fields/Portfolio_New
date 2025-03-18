@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Joshua Fields</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demo2.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+</head>
+
+<body class="demo-2">
+    <div class="content content--canvas">
+        <body>
+            <header>
+                <section id="about-hero">
+                    <canvas id="swirlCanvas"></canvas>
+                    <div class="about-hero-text">
+                        <h1>About Me</h1>
+                    <nav>
+                        <a href="/">Home</a>
+                        <a href="#background">Background</a>
+                        <a href="#volunteer">Volunteer Work</a>
+                        <a href="#startup">Startup Journey</a>
+                    </nav>
+                    </div>
+                </section>
+            </header>
+
+            <!-- Background Section -->
+            <section id="background" class="about-section">
+                <div id="background-particles"></div>
+                <div class="about-container">
+                    <div class="about-text" data-aos="fade-right">
+                        <h2>My Background</h2>
+                        <p>Hello, I'm Joshua Fields.</p>
+                        <p>My passion for AI began at the London Science Museum in 2017. They debuted an Artificial Intelligence exhibit, sparking my lifelong interest.</p>
+                        <p>I pursued this passion by earning a Bachelor's degree in Computer Science (AI) at Brunel University.</p>
+                    </div>
+                    <div class="about-image" data-aos="fade-left">
+                        <!-- Replace with your background image -->
+                        <img src="{{ url_for('static', filename='img/BRUNEL.png') }}" alt="Background Image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Volunteer Work -->
+            <section id="volunteer" class="about-section">
+                <div class="about-container reverse">
+                    <div class="about-text" data-aos="fade-left">
+                        <h2>Volunteer Work</h2>
+                        <p>I volunteered for <strong>Vita Nova</strong>, an addiction and recovery charity.</p>
+                        <p>I helped build their website and organized community events supporting those in recovery.</p>
+                    </div>
+                    <div class="about-image" data-aos="fade-right">
+                        <!-- Replace with your volunteer image -->
+                        <img src="{{ url_for('static', filename='img/vita-Nova-logo.png') }}" alt="Volunteer Image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Startup Journey -->
+            <section id="startup" class="about-section">
+                <div class="about-container">
+                    <div class="about-text" data-aos="fade-right">
+                        <h2>Uncle Sam's Corndogs</h2>
+                        <p>I co-founded <strong>Uncle Sam's Corndogs</strong>, a family-run food company.</p>
+                        <p>I led brand design, social media, and acted as SCRUM master.</p>
+                        <p>By managing the team and planning, we successfully launched the business in under a year.</p>
+                    </div>
+                    <div class="about-image" data-aos="fade-left">
+                        <!-- Replace with your startup image -->
+                        <img src="{{ url_for('static', filename='img/unclesams.png') }}" alt="Startup Image">
+                    </div>
+                </div>
+            </section>
+
+            <script src="{{ url_for('static', filename='script.js') }}"></script>
+            <script>AOS.init({ duration: 1000, once: true });</script>
+        </body>
+    </div>
+</body>
+
+
+
+</html>

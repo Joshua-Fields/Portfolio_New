@@ -1,0 +1,19 @@
+html, body {
+  background: hsla(260,40%,5%,1);
+}
+
+/* Make sure content is above the swirl's canvas */
+.content--canvas {
+  position: relative;
+  z-index: 1;
+}
+
+/* Typically swirl.js appends a canvas with a class or inline style.
+   We can force it behind everything: */
+.content--canvas canvas {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* so user can still click on your content */
+}

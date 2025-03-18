@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +9,13 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <!-- tsParticles Core Library -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-
-    <!-- Bubble Effect Plugin -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-effect-bubble@2.12.0/tsparticles.effect.bubble.min.js"></script>
-
 </head>
+
 <body>
     <div id="tsparticles"></div>
+
     <header>
         <section id="hero">
             <div class="profile-container">
@@ -30,21 +25,24 @@
             <nav>
                 <a href="https://github.com/Joshua-Fields" target="_blank">GitHub</a>
                 <a href="https://www.linkedin.com/in/joshua-fields-/" target="_blank">LinkedIn</a>
+                <a href="/about">About Me</a>  <!-- ✅ About Me link kept -->
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
             </nav>
         </section>
     </header>
 
-    <section id="projects">
 
-        <div id="projects-particles"></div> <!-- New particle effect only for projects -->
+    <!-- ✅ PROJECTS Section -->
+    <section id="projects" style="position: relative;">
+        <div id="projects-particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
 
-        <div class="projects-container">
+        <div class="projects-container" style="position: relative; z-index: 2;">
             <div class="projects-text" data-aos="custom-blur">
                 <h2>My Projects</h2>
                 <p>Here are some of the projects I've worked on. Check them out on GitHub!</p>
             </div>
+
             <div class="projects-list">
                 {% for project in projects %}
                     <div class="project-card" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
@@ -57,46 +55,42 @@
         </div>
     </section>
 
-
-
-
-    <section id="contact">
-        <div id="contact-overlay-left">
-            <div id="contact-particles"></div> <!-- Use class -->
+    <!-- ✅ CONTACT Section -->
+    <section id="contact" style="position: relative;">
+        <div id="contact-overlay-left" style="position: absolute; top: 0; left: 0; width: 25%; height: 100%; z-index: 1;">
+            <div id="contact-particles" style="width: 100%; height: 100%;"></div>
         </div>
 
-        <div id="contact-overlay-right">
-            <div id="contact-particles1"></div> <!-- Use class -->
+        <div id="contact-overlay-right" style="position: absolute; top: 0; right: 0; width: 25%; height: 100%; z-index: 1;">
+            <div id="contact-particles1" style="width: 100%; height: 100%;"></div>
         </div>
 
-    <div class="contact-container">
-        <div class="contact-text" data-aos="custom-blur">
-            <h2>Contact Me</h2>
+        <div class="contact-container" style="position: relative; z-index: 2;">
+            <div class="contact-text" data-aos="custom-blur">
+                <h2>Contact Me</h2>
+            </div>
+
+            <form action="/contact" method="POST" data-aos="fade-up">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
         </div>
-        <form action="/contact" method="POST" data-aos="fade-up">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash-message {{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-
-    </div>
-</section>
-
-
+    </section>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>AOS.init();</script>
-
 </body>
+
 </html>

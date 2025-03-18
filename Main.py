@@ -83,6 +83,9 @@ def contact():
         logging.error(f"❌ Email sending error: {error_details}")
         return f"❌ Internal Server Error: {error_details}", 500  # Return error response
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 
