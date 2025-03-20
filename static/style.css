@@ -18,12 +18,64 @@ html{
   scroll-behavior: smooth;
 }
 
+
 nav a {
+    position: relative;
     margin: 0 15px;
     text-decoration: none;
     color: #3ED9EA;
     font-weight: 600;
+    transition: color 0.3s ease;
 }
+
+/* Add the animated underline */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #3ED9EA;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:nth-child(1)::after { background-color: #FF6B6B; }
+nav a:nth-child(2)::after { background-color: #3ED9EA; }
+nav a:nth-child(3)::after { background-color: #FFD93D; }
+nav a:nth-child(4)::after { background-color: #E96E03; }
+nav a:nth-child(5)::after { background-color: #4F52F8; }
+
+h1.animated-title {
+    position: relative;
+    color: #FFFF;
+    font-size: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect */
+h1.animated-title:hover {
+    color: #00f0ff;
+    text-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+    transition: color 0.3s ease-in-out;
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+
+
+
+
 
 #projects {
     position: relative;
@@ -355,7 +407,7 @@ button:hover {
     padding: 100px 20px;
     color: white;
     overflow: hidden;
-    background-color: #000; /* Optional: you can tweak this */
+    background-color: transparent; /* Optional: you can tweak this */
 }
 
 .about-container {
@@ -429,19 +481,31 @@ button:hover {
 /* Responsive Design */
 @media (max-width: 768px) {
     .projects-container {
-        flex-direction: column; /* Stack text and cards vertically */
-        gap: 30px;
-        align-items: center; /* Center on mobile */
-        text-align: center;
-
-    .about-container.reverse {
         flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-container,
+    .about-container.reverse {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
     }
 
     .about-text, .about-image {
+        width: 100%;
         max-width: 90%;
+        text-align: center;
+    }
+
+    .about-image img {
+        width: 100%;
+        height: auto;
     }
 }
+
 
 #about-hero {
     position: relative;
@@ -465,6 +529,14 @@ button:hover {
     font-size: 4rem;
     color: #3ED9EA;
     text-shadow: 0 0 10px #3ED9EA, 0 0 20px #3ED9EA;
+}
+
+/* Hover effect */
+.about-hero-text h1:hover {
+    color: #00f0ff;
+    text-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+    transition: color 0.3s ease-in-out;
+    transition: text-shadow 0.3s ease-in-out;
 }
 
 
