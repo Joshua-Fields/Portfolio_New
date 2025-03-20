@@ -278,6 +278,7 @@ button:hover {
     align-items: center;
     overflow: hidden;
     min-height: 500px;
+    background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
 
 }
 
@@ -288,7 +289,6 @@ button:hover {
     top: 0;
     width: 25%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9); /* Dark overlay */
     z-index: 2;
     overflow: hidden;
 }
@@ -380,6 +380,7 @@ button:hover {
 .contact-container {
     position: relative;
     z-index: 2;
+    
 }
 
 /* Contact text and form elements above particles */
@@ -407,7 +408,7 @@ button:hover {
     padding: 100px 20px;
     color: white;
     overflow: hidden;
-    background-color: transparent; /* Optional: you can tweak this */
+    background-color: rgba(0, 0, 0, 0.8); /* 50% black overlay */
 }
 
 .about-container {
